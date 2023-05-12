@@ -1,14 +1,17 @@
 # basic-cms-backend
 ## This project uses Strapi as a backend for basic content pages
 
+* git clone --depth 1 git@github.com:tbcarver/basic-cms-backend.git <new-name> && rm -rf ./<new-name>/.git
 * Postgress backend (suggest supabase)
 * Docker image with lambda deploy
 * Api Gateway for http access
 * Find and replace 'basic-cms-backend' for a custom name
-* `cp .env.example .env`
-* .env
+* `cp .env.example .env.prod`
+* .env.prod
   * Generate keys
   * Set database settings
+* `npm i`
+* `npm run build:deploy` 
 
 Details on how to do serverless with strapi
 https://blog.vikfand.com/posts/serverless-strapi-4-guide/
