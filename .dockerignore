@@ -1,0 +1,11 @@
+**/node_modules/@babel
+**/node_modules/@esbuild
+**/node_modules/@formatjs/intl-displaynames/locale-data
+**/node_modules/@sentry
+**/node_modules/@strapi/admin/node_modules/typescript
+**/node_modules/@types
+**/node_modules/esbuild
+**/node_modules/esbuild-loader
+**/node_modules/serverless
+**/node_modules/@webpack*/
+**/node_modules/webpack*/

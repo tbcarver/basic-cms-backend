@@ -1,0 +1,75 @@
+service: basic-cms-backend
+frameworkVersion: "3"
+configValidationMode: error
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-west-2
+  logRetentionInDays: 30
+  versionFunctions: false
+  memorySize: 2048
+  timeout: 30
+  ecr:
+    images:
+      basic-cms-backend:
+        path: ./
+        buildArgs:
+          STAGE: ${opt:stage}
+  environment:
+    NODE_ENV: ${env:NODE_ENV, 'development'}
+    HOST: ${env:HOST}
+    PORT: ${env:PORT}
+    PUBLIC_URL: ${env:PUBLIC_URL}
+    APP_KEYS: ${env:APP_KEYS}
+    API_TOKEN_SALT: ${env:API_TOKEN_SALT}
+    TRANSFER_TOKEN_SALT: ${env:TRANSFER_TOKEN_SALT}
+    ADMIN_JWT_SECRET: ${env:ADMIN_JWT_SECRET}
+    JWT_SECRET: ${env:JWT_SECRET}
+    
+    DATABASE_CLIENT: ${env:DATABASE_CLIENT}
+    DATABASE_HOST: ${env:DATABASE_HOST}
+    DATABASE_PORT: ${env:DATABASE_PORT}
+    DATABASE_NAME: ${env:DATABASE_NAME}
+    DATABASE_USERNAME: ${env:DATABASE_USERNAME}
+    DATABASE_PASSWORD: ${env:DATABASE_PASSWORD}
+    DATABASE_SSL: ${env:DATABASE_SSL}
+  httpApi:
+    cors:
+      allowedOrigins: ['*']
+      allowedMethods: ['*']
+      allowedHeaders: ['*']
+
+package:
+  excludeDevDependencies: true
+  exclude:
+    - "**"
+  include:
+    - "build/**"
+    - "config/**"
+    - "database/**"
+    - "node_modules/**"
+    - "public/**"
+    - "src/**"
+    - "package.json"
+    - "!node_modules/@babel/**"
+    - "!node_modules/@esbuild/**"
+    - "!node_modules/@formatjs/intl-displaynames/locale-data/**"
+    - "!node_modules/@sentry/**"
+    - "!node_modules/@strapi/admin/node_modules/typescript/**"
+    - "!node_modules/@strapi/typescript-utils/**"
+    - "!node_modules/@types/**"
+    - "!node_modules/esbuild/**"
+    - "!node_modules/esbuild-loader/**"
+    - "!node_modules/typescript/**"
+    - "!node_modules/webpack/**"
+
+functions:
+  server:
+    image: basic-cms-backend
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline

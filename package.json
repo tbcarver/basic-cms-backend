@@ -1,0 +1,49 @@
+{
+  "name": "basic-cms-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "deploy:dev": "NODE_ENV=development sls deploy --stage dev --aws-profile default",
+    "deploy:dev:function": "NODE_ENV=development sls deploy function --stage dev --function server --aws-profile default",
+    "deploy:prod": "NODE_ENV=production sls deploy --stage prod --aws-profile default",
+    "deploy:prod:function": "NODE_ENV=production sls deploy function --stage prod --function server --aws-profile default",
+    "nodemon": "NODE_ENV=development nodemon --watch server",
+    "offline": "sls offline start",
+    "offline:dev": "nodemon --exec 'sls' offline start --watch server",
+    "dev": "strapi develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "build:clean": "rm -rf ./build",
+    "build:offline": "ENV_PATH=./.env.dev strapi build",
+    "build:prod": "ENV_PATH=./.env.prod strapi build",
+    "build:docker": "docker build --build-arg STAGE=prod -t basic-cms-backend .",
+    "build:docker:offline": "docker build --build-arg STAGE=dev -t basic-cms-backend .",
+    "build:deploy": "npm run build:clean && npm run build:prod && npm run build:docker && npm run deploy:prod:function",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-i18n": "4.7.1",
+    "@strapi/plugin-users-permissions": "4.7.1",
+    "@strapi/strapi": "4.7.1",
+    "mysql": "^2.18.1",
+    "pg": "^8.9.0",
+    "serverless": "^3.28.1",
+    "serverless-http": "^3.1.1"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "35e18a69-658f-4ba3-8856-1a9390a28a21"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-offline": "^12.0.4"
+  }
+}
