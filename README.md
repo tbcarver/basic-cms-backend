@@ -17,6 +17,8 @@ Details on how to do serverless with strapi
 https://blog.vikfand.com/posts/serverless-strapi-4-guide/
 
 To develop (development mode)
+*Ensure no build directory*
+`rm -rf build && rm -rf .cache`
 `npm run dev`
 
 To build and deploy to first time to aws:
@@ -43,6 +45,9 @@ Strapi comes with a full featured [Command Line Interface](https://docs.strapi.i
 ### `develop`
 
 Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)
+
+*Ensure no build directory*
+`rm -rf build && rm -rf .cache`
 
 ```
 npm run develop
