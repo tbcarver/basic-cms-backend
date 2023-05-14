@@ -1,8 +1,7 @@
 {
   "name": "basic-cms-backend",
-  "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "private": true,
   "scripts": {
     "build": "strapi build",
     "build:clean": "rm -rf ./build",
@@ -25,26 +24,22 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.7.1",
-    "@strapi/plugin-users-permissions": "4.7.1",
-    "@strapi/strapi": "4.7.1",
-    "mysql": "^2.18.1",
-    "pg": "^8.9.0",
-    "serverless": "^3.28.1",
-    "serverless-http": "^3.1.1"
+    "@strapi/plugin-users-permissions": "^4.10.5",
+    "@strapi/strapi": "^4.10.5",
+    "pg": "^8.10.0",
+    "serverless": "^3.30.1",
+    "serverless-http": "^3.2.0"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "devDependencies": {
+    "serverless-offline": "^12.0.4"
   },
+  "author": "Tyler Carver <tbcarver2@gmail.com> (https://github.com/tbcarver)",
+  "license": "MIT",
   "strapi": {
     "uuid": "35e18a69-658f-4ba3-8856-1a9390a28a21"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "serverless-offline": "^12.0.4"
   }
 }

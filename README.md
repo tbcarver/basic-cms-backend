@@ -1,4 +1,4 @@
-# basic-cms-backend
+# Basic CMS Backend
 ## This project uses Strapi as a backend for basic content pages
 
 * git clone --depth 1 git@github.com:tbcarver/basic-cms-backend.git <new-name> && rm -rf ./<new-name>/.git
