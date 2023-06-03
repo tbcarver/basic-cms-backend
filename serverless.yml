@@ -69,6 +69,10 @@ functions:
     image: basic-cms-backend
     events:
       - httpApi: '*'
+      - schedule:
+          name: 'daily-keep-supabase-alive'
+          description: 'Daily event at 2 AM EST to keep supabase alive'
+          rate: cron(0 6 * * ? *)
 
 plugins:
   - serverless-offline
