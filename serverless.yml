@@ -40,6 +40,10 @@ provider:
       allowedMethods: ['*']
       allowedHeaders: ['*']
 
+custom:
+  bucketAllowedOriginsClient: ${env:AWS_BUCKET_ALLOWED_ORIGINS_CLIENT, '*'}
+  bucketAllowedOriginsServer: ${env:AWS_BUCKET_ALLOWED_ORIGINS_SERVER, '*'}
+
 package:
   excludeDevDependencies: true
   exclude:
@@ -73,6 +77,43 @@ functions:
           name: 'daily-keep-supabase-alive'
           description: 'Daily event at 2 AM EST to keep supabase alive'
           rate: cron(0 6 * * ? *)
+
+resources:
+  Resources:
+    NewBucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        BucketName: ${env:AWS_BUCKET}
+        CorsConfiguration:
+          CorsRules:
+            -
+              AllowedOrigins:
+                - ${self:custom.bucketAllowedOriginsClient}
+                - ${self:custom.bucketAllowedOriginsServer}
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+              MaxAge: 3000
+      NewBucketPolicy: 
+        Type: 'AWS::S3::BucketPolicy'
+        Properties: 
+          Bucket: 
+            Ref: NewBucket
+          PolicyDocument: 
+            Statement: 
+              - 
+                Action: 
+                  - 's3:PutObject'
+                  - 's3:GetObject'
+                  - 's3:ListBucket'
+                  - 's3:DeleteObject'
+                  - 's3:PutObjectAcl'
+                Effect: 'Allow'
+                Resource: 
+                  - Fn::Sub: arn:aws:s3:::${NewBucket}/*
+                  - Fn::Sub: arn:aws:s3:::${NewBucket}
+                Principal: '*'
 
 plugins:
   - serverless-offline
