@@ -10,7 +10,7 @@ provider:
   logRetentionInDays: 30
   versionFunctions: false
   memorySize: 2048
-  timeout: 30
+  timeout: 25
   ecr:
     images:
       basic-cms-backend:
@@ -90,30 +90,14 @@ resources:
               AllowedOrigins:
                 - ${self:custom.bucketAllowedOriginsClient}
                 - ${self:custom.bucketAllowedOriginsServer}
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - GET
-              MaxAge: 3000
-      NewBucketPolicy: 
-        Type: 'AWS::S3::BucketPolicy'
-        Properties: 
-          Bucket: 
-            Ref: NewBucket
-          PolicyDocument: 
-            Statement: 
-              - 
-                Action: 
-                  - 's3:PutObject'
-                  - 's3:GetObject'
-                  - 's3:ListBucket'
-                  - 's3:DeleteObject'
-                  - 's3:PutObjectAcl'
-                Effect: 'Allow'
-                Resource: 
-                  - Fn::Sub: arn:aws:s3:::${NewBucket}/*
-                  - Fn::Sub: arn:aws:s3:::${NewBucket}
-                Principal: '*'
+              AllowedHeaders: ['*']
+              AllowedMethods: ['GET']
+              MaxAge: 2592000
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
 
 plugins:
   - serverless-offline

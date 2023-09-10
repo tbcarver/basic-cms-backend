@@ -6,8 +6,8 @@
     "build": "strapi build",
     "build:clean": "rm -rf ./build",
     "build:offline": "ENV_PATH=./.env.dev strapi build",
-    "build:deploy": "export NODE_ENV=production && export AWS_PROFILE=default && export REGION=$(aws configure get region --profile $AWS_PROFILE) && npm run build:clean && npm run build:prod && npm run build:docker && npm run deploy:prod && build:clean",
-    "build:deploy:function": "export NODE_ENV=production && export AWS_PROFILE=default && export REGION=$(aws configure get region --profile $AWS_PROFILE) && npm run build:clean && npm run build:prod && npm run build:docker && npm run deploy:prod:function && build:clean",
+    "build:deploy": "export NODE_ENV=production && export AWS_PROFILE=default && export REGION=$(aws configure get region --profile $AWS_PROFILE) && npm run build:clean && npm run build:prod && npm run build:docker && npm run deploy:prod && npm run build:clean",
+    "build:deploy:function": "export NODE_ENV=production && export AWS_PROFILE=default && export REGION=$(aws configure get region --profile $AWS_PROFILE) && npm run build:clean && npm run build:prod && npm run build:docker && npm run deploy:prod:function && npm run build:clean",
     "build:docker": "docker build --build-arg STAGE=prod -t basic-cms-backend .",
     "build:docker:offline": "docker build --build-arg STAGE=dev -t basic-cms-backend .",
     "build:prod": "ENV_PATH=./.env.prod strapi build",
@@ -24,10 +24,11 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-users-permissions": "^4.10.5",
-    "@strapi/strapi": "^4.10.5",
-    "pg": "^8.10.0",
-    "serverless": "^3.30.1",
+    "@strapi/plugin-users-permissions": "^4.11.0",
+    "@strapi/provider-upload-aws-s3": "^4.11.0",
+    "@strapi/strapi": "^4.11.0",
+    "pg": "^8.11.0",
+    "serverless": "^3.32.2",
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
